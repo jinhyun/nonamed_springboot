@@ -52,7 +52,7 @@ public class AppTests {
                         |개발2팀, d0004, d0002
                             |-2팀장, d0004
                         |개발3팀, d0005, d0002
-                    |운영본부, d0006
+                    |운영본부, d0006, root
      */
     @Test
     public void testGetOrganizationList() {
