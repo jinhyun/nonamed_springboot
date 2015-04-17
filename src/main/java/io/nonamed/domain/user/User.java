@@ -36,6 +36,10 @@ public class User {
         return email;
     }
 
+    public void setDeptCode(String deptCode) {
+        this.deptCode = deptCode;
+    }
+
     public void setEmail(String email) {
         this.email = email;
     }

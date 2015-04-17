@@ -9,10 +9,6 @@ public class Organization {
     private List<Department> departmentList;
     private Department department;
 
-    public Organization(String deptCode) {
-
-    }
-
     public List<User> getUserList() {
         return userList;
     }
@@ -23,5 +19,17 @@ public class Organization {
 
     public Department getDepartment() {
         return department;
+    }
+
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
+    }
+
+    public void setDepartmentList(List<Department> departmentList) {
+        this.departmentList = departmentList;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 }

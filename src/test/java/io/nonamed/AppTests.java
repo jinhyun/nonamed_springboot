@@ -3,14 +3,23 @@ package io.nonamed;
 import io.nonamed.domain.department.Department;
 import io.nonamed.domain.organization.Organization;
 import io.nonamed.domain.user.User;
+import io.nonamed.service.organization.OrganizationService;
+import io.nonamed.service.user.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.boot.test.TestRestTemplate;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.RestTemplate;
 import org.junit.*;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import java.util.List;
 
+import java.util.List;
+import org.junit.runner.RunWith;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringApplicationConfiguration(classes = Application.class)
 public class AppTests {
     RestTemplate template = new TestRestTemplate();
     String indexUrl = "http://localhost:8080";
@@ -54,10 +63,15 @@ public class AppTests {
                         |개발3팀, d0005, d0002
                     |운영본부, d0006, root
      */
+    @Autowired
+    UserService userService;
+    @Autowired
+    OrganizationService organizationService;
+
     @Test
-    public void testGetOrganizationList() {
+    public void testGetOrganization() {
         String deptCode = "root";
-        Organization organization = new Organization(deptCode);
+        Organization organization = organizationService.getOrganization(deptCode);
 
         // 조회하는 부서정보
         assertThat("Nonamed Company",
@@ -66,7 +80,7 @@ public class AppTests {
         // 하위 사용자정보
         List <User> userList = organization.getUserList();
         assertThat("CEO", is(userList.get(0).getName()));
-        assertThat("ceo@gmail.com", is(userList.get(0).getEmail()));
+        assertThat("ceo@nonamed.io", is(userList.get(0).getEmail()));
         assertThat("root", is(userList.get(0).getDeptCode()));
 
         // 하위 부서정보
@@ -78,13 +92,5 @@ public class AppTests {
         assertThat("개발본부", is(departmentList.get(1).getDeptName()));
         assertThat("d0002", is(departmentList.get(1).getDeptCode()));
         assertThat("root", is(departmentList.get(1).getUpDeptCode()));
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void testGetOrganizationList_null() {
-        String deptCode = "root";
-        Organization organization = new Organization(deptCode);
-        List <Department> departmentList = organization.getDepartmentList();
-        departmentList.get(2).getDeptName();
     }
 }
