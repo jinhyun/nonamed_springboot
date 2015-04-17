@@ -11,6 +11,7 @@ public class Department {
     private String deptCode;
     private String deptName;
     private String upDeptCode;
+    private String depth;
 
     public String getDeptName() {
         return deptName;
@@ -22,5 +23,9 @@ public class Department {
 
     public String getUpDeptCode() {
         return upDeptCode;
+    }
+
+    public String getDepth() {
+        return depth;
     }
 }

@@ -14,6 +14,7 @@ import org.junit.*;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
 
 import java.util.List;
 import org.junit.runner.RunWith;
@@ -69,9 +70,9 @@ public class AppTests {
     OrganizationService organizationService;
 
     @Test
-    public void testGetOrganization() {
+    public void testGetOrganizationDept() {
         String deptCode = "root";
-        Organization organization = organizationService.getOrganization(deptCode);
+        Organization organization = organizationService.getOrganizationDept(deptCode);
 
         // 조회하는 부서정보
         assertThat("Nonamed Company",
@@ -92,5 +93,21 @@ public class AppTests {
         assertThat("개발본부", is(departmentList.get(1).getDeptName()));
         assertThat("d0002", is(departmentList.get(1).getDeptCode()));
         assertThat("root", is(departmentList.get(1).getUpDeptCode()));
+    }
+
+    @Test
+    public void testGetOrganization_선택한부서에서_최상위부서까지조회() {
+        String deptCode = "d0004";
+        Organization organization =
+                organizationService.getOrganizationToRoot(deptCode);
+
+//        List<Department> departmentList = organization.getDepartmentList();
+//        assertThat("Nonamed Company", is(departmentList.get(0).getDeptName()));
+//        assertThat("개발본부", is(departmentList.get(1).getDeptName()));
+//        assertThat("개발1팀", is(departmentList.get(2).getDeptName()));
+//        assertThat("개발2팀", is(departmentList.get(3).getDeptName()));
+
+//        List<User> userList = organization.getUserList();
+//        assertThat("1팀장", not(userList.get(2).getName()));
     }
 }

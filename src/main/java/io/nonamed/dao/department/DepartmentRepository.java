@@ -7,4 +7,7 @@ import java.util.List;
 public interface DepartmentRepository extends JpaRepository <Department,
         String> {
     List<Department> findByUpDeptCode(String deptCode);
+
+    List<Department> findByUpDeptCodeInOrderByDepthAscDeptCodeAsc
+            (List<String> upDeptCodeList);
 }
