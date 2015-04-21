@@ -1,50 +1,45 @@
 package io.nonamed.domain.user;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import io.nonamed.domain.organization.Organ;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="USER")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int no;
-    private String name;
-    private String email;
-    private String deptCode;
+    @Column(name="USER_ID")
+    private String userId;
 
-    public int getNo() {
-        return no;
+    @Column(name="USER_NAME")
+    private String userName;
+
+    @OneToMany(mappedBy="users", cascade=CascadeType.ALL)
+    List<Organ> organList = new ArrayList<>();
+
+    public String getUserId() {
+        return userId;
     }
 
-    public void setNo(int no) {
-        this.no = no;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public String getName() {
-        return name;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getEmail() {
-        return email;
+    public List<Organ> getOrganList() {
+        return organList;
     }
 
-    public void setDeptCode(String deptCode) {
-        this.deptCode = deptCode;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getDeptCode() {
-        return deptCode;
+    public void setOrganList(List<Organ> organList) {
+        this.organList = organList;
     }
 }
