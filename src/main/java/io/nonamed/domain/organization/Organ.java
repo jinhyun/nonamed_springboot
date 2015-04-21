@@ -24,8 +24,8 @@ public class Organ {
     @JoinColumn(name="DEPT_CODE")
     private Dept depts;
 
-    @Column(name="ORGAN_UP_DEPT_CODES")
-    private String organUpDeptCodes;
+    @Column(name="ORGAN_DEPT_LOCATION")
+    private String organDeptLocation;
 
     public int getOrganId() {
         return organId;
@@ -59,11 +59,11 @@ public class Organ {
         this.depts = depts;
     }
 
-    public String getOrganUpDeptCodes() {
-        return organUpDeptCodes;
+    public String getOrganDeptLocation() {
+        return organDeptLocation;
     }
 
-    public void setOrganUpDeptCodes(String organUpDeptCodes) {
-        this.organUpDeptCodes = organUpDeptCodes;
+    public void setOrganDeptLocation(String organDeptLocation) {
+        this.organDeptLocation = organDeptLocation;
     }
 }

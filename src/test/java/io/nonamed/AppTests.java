@@ -135,47 +135,48 @@ public class AppTests {
 
     @Test
     public void initInsertOrgan_AllData() {
-        // Insert into Dept
-        Dept dept = new Dept();
-        String deptCode = "d1000";
-        String deptName = "Nonamed Company";
-        String deptLocation = "d1000";
-        dept.setDeptCode(deptCode);
-        dept.setDeptName(deptName);
-        dept.setDeptLocation(deptLocation);
-        deptRepository.save(dept);
+        insertDeptAndOrgan("d1000", "Nonamed Company", "d1000");
+        insertUserAndOrgan("ceo", "노미정", "d1000");
+        System.out.println("ok");
+    }
 
-        // Insert into Organ from Dept
-        Dept deptOrgan = new Dept();
-        deptOrgan.setDeptCode(deptCode);
-
-        Organ organDept = new Organ();
-        organDept.setOrganDeptName(deptName);
-        organDept.setOrganUpDeptCodes(deptLocation);
-        organDept.setDepts(deptOrgan);
-        organRepository.save(organDept);
-
+    public void insertUserAndOrgan(String userId, String userName, String deptCode) {
         // Insert into User
-        String userId = "ceo";
-        String userName = "노미정";
         User user = new User();
         user.setUserId(userId);
         user.setUserName(userName);
         userRepository.save(user);
 
         // Insert into Organ from UserDept
-        String organDeptCode = "d1000";
-        String organDeptName = "Nonamed Company";
-        Dept deptUser = new Dept();
-        deptUser.setDeptCode(organDeptCode);
+        Dept dbDept = deptRepository.findOne(deptCode);
 
-        Organ organUserDept = new Organ();
-        organUserDept.setOrganDeptName(organDeptName);
-        organUserDept.setOrganUpDeptCodes(deptLocation);
+        Organ organ = new Organ();
+        organ.setOrganDeptName(dbDept.getDeptName());
+        organ.setOrganDeptLocation(dbDept.getDeptLocation());
 
-        organUserDept.setUsers(user);       // select user
-        organUserDept.setDepts(deptUser);   // select dept
-        organRepository.save(organUserDept);
+        organ.setUsers(user);   // select user
+        organ.setDepts(dbDept); // select dbDept
+        organRepository.save(organ);
+        System.out.println("ok");
+    }
+
+    public void insertDeptAndOrgan(
+            String deptCode, String deptName, String deptLocation) {
+        // Insert into Dept
+        Dept dept = new Dept();
+        dept.setDeptCode(deptCode);
+        dept.setDeptName(deptName);
+        dept.setDeptLocation(deptLocation);
+        deptRepository.save(dept);
+
+        // Insert into Organ from Dept
+        Dept dbDept = deptRepository.findOne(deptCode);
+
+        Organ organ = new Organ();
+        organ.setOrganDeptName(deptName);
+        organ.setOrganDeptLocation(deptLocation);
+        organ.setDepts(dbDept);
+        organRepository.save(organ);
         System.out.println("ok");
     }
 }
