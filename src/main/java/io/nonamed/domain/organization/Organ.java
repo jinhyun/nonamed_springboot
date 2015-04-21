@@ -27,6 +27,8 @@ public class Organ {
     @Column(name="ORGAN_DEPT_LOCATION")
     private String organDeptLocation;
 
+    //TODO - Need Code: User or Dept
+
     public int getOrganId() {
         return organId;
     }

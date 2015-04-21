@@ -134,9 +134,22 @@ public class AppTests {
     }
 
     @Test
-    public void initInsertOrgan_AllData() {
+    public void insertOrgan_initData() {
+        // Tree
         insertDeptAndOrgan("d1000", "Nonamed Company", "d1000");
-        insertUserAndOrgan("ceo", "노미정", "d1000");
+            insertUserAndOrgan("ceo", "노미정", "d1000");
+            insertDeptAndOrgan("d1001", "경영지원", "d1001, d1000");
+            insertDeptAndOrgan("d1002", "개발본부", "d1002, d1000");
+                insertUserAndOrgan("devBon", "개발본부장", "d1002");
+            insertDeptAndOrgan("d1003", "개발1팀", "d1003, d1002, d1000");
+                insertUserAndOrgan("oneTeamLeader", "1팀장", "d1003");
+                insertUserAndOrgan("oneTeamAdvanceDeveloper", "1팀고급개발자", "d1003");
+            insertDeptAndOrgan("d1004", "개발2팀", "d1004, d1002, d1000");
+                insertUserAndOrgan("twoTeamLeader", "2팀장", "d1004");
+            insertDeptAndOrgan("d1005", "개발3팀", "d1005, d1002, d1000");
+                insertUserAndOrgan("threeTeamLeader", "3팀장", "d1005");
+                insertUserAndOrgan("threeTeamBasicDeveloper", "3팀초급개발자", "d1005");
+            insertDeptAndOrgan("d1006", "운영본부", "d1006, d1002, d1000");
         System.out.println("ok");
     }
 
