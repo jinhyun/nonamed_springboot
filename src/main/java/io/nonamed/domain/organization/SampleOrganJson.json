@@ -1,0 +1,172 @@
+{
+  "organJsonList": [
+    {
+      "organId": 1,
+      "organDeptName": "Nonamed Company",
+      "depts": {
+        "deptCode": "d1000",
+        "deptName": "Nonamed Company",
+        "deptLocation": "d1000"
+      },
+      "organDeptLocation": "d1000"
+    },
+    {
+      "organId": 2,
+      "organDeptName": "Nonamed Company",
+      "users": {
+        "userId": "ceo",
+        "userName": "노미정"
+      },
+      "depts": {
+        "deptCode": "d1000",
+        "deptName": "Nonamed Company",
+        "deptLocation": "d1000"
+      },
+      "organDeptLocation": "d1000"
+    },
+    {
+      "organId": 3,
+      "organDeptName": "경영지원",
+      "depts": {
+        "deptCode": "d1001",
+        "deptName": "경영지원",
+        "deptLocation": "d1001, d1000"
+      },
+      "organDeptLocation": "d1001, d1000"
+    },
+    {
+      "organId": 4,
+      "organDeptName": "개발본부",
+      "depts": {
+        "deptCode": "d1002",
+        "deptName": "개발본부",
+        "deptLocation": "d1002, d1000"
+      },
+      "organDeptLocation": "d1002, d1000"
+    },
+    {
+      "organId": 5,
+      "organDeptName": "개발본부",
+      "users": {
+        "userId": "devBon",
+        "userName": "개발본부장"
+      },
+      "depts": {
+        "deptCode": "d1002",
+        "deptName": "개발본부",
+        "deptLocation": "d1002, d1000"
+      },
+      "organDeptLocation": "d1002, d1000"
+    },
+    {
+      "organId": 6,
+      "organDeptName": "개발1팀",
+      "depts": {
+        "deptCode": "d1003",
+        "deptName": "개발1팀",
+        "deptLocation": "d1003, d1002, d1000"
+      },
+      "organDeptLocation": "d1003, d1002, d1000"
+    },
+    {
+      "organId": 7,
+      "organDeptName": "개발1팀",
+      "users": {
+        "userId": "oneTeamLeader",
+        "userName": "1팀장"
+      },
+      "depts": {
+        "deptCode": "d1003",
+        "deptName": "개발1팀",
+        "deptLocation": "d1003, d1002, d1000"
+      },
+      "organDeptLocation": "d1003, d1002, d1000"
+    },
+    {
+      "organId": 8,
+      "organDeptName": "개발1팀",
+      "users": {
+        "userId": "oneTeamAdvanceDeveloper",
+        "userName": "1팀고급개발자"
+      },
+      "depts": {
+        "deptCode": "d1003",
+        "deptName": "개발1팀",
+        "deptLocation": "d1003, d1002, d1000"
+      },
+      "organDeptLocation": "d1003, d1002, d1000"
+    },
+    {
+      "organId": 9,
+      "organDeptName": "개발2팀",
+      "depts": {
+        "deptCode": "d1004",
+        "deptName": "개발2팀",
+        "deptLocation": "d1004, d1002, d1000"
+      },
+      "organDeptLocation": "d1004, d1002, d1000"
+    },
+    {
+      "organId": 10,
+      "organDeptName": "개발2팀",
+      "users": {
+        "userId": "twoTeamLeader",
+        "userName": "2팀장"
+      },
+      "depts": {
+        "deptCode": "d1004",
+        "deptName": "개발2팀",
+        "deptLocation": "d1004, d1002, d1000"
+      },
+      "organDeptLocation": "d1004, d1002, d1000"
+    },
+    {
+      "organId": 11,
+      "organDeptName": "개발3팀",
+      "depts": {
+        "deptCode": "d1005",
+        "deptName": "개발3팀",
+        "deptLocation": "d1005, d1002, d1000"
+      },
+      "organDeptLocation": "d1005, d1002, d1000"
+    },
+    {
+      "organId": 12,
+      "organDeptName": "개발3팀",
+      "users": {
+        "userId": "threeTeamLeader",
+        "userName": "3팀장"
+      },
+      "depts": {
+        "deptCode": "d1005",
+        "deptName": "개발3팀",
+        "deptLocation": "d1005, d1002, d1000"
+      },
+      "organDeptLocation": "d1005, d1002, d1000"
+    },
+    {
+      "organId": 13,
+      "organDeptName": "개발3팀",
+      "users": {
+        "userId": "threeTeamBasicDeveloper",
+        "userName": "3팀초급개발자"
+      },
+      "depts": {
+        "deptCode": "d1005",
+        "deptName": "개발3팀",
+        "deptLocation": "d1005, d1002, d1000"
+      },
+      "organDeptLocation": "d1005, d1002, d1000"
+    },
+    {
+      "organId": 14,
+      "organDeptName": "운영본부",
+      "depts": {
+        "deptCode": "d1006",
+        "deptName": "운영본부",
+        "deptLocation": "d1006, d1002, d1000"
+      },
+      "organDeptLocation": "d1006, d1002, d1000"
+    }
+  ]
+}
