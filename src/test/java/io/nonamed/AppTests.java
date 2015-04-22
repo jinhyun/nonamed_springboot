@@ -1,7 +1,5 @@
 package io.nonamed;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import io.nonamed.dao.department.DeptRepository;
 import io.nonamed.dao.organization.OrganRepository;
 import io.nonamed.dao.user.UserRepository;
@@ -144,16 +142,10 @@ public class AppTests {
     public void getOrganAllList() {
         insertOrgan_initData();
         List<Organ> organList = organService.getOrganAllList();
-        // TODO: <Organ>형을 변경할수 있어야 파일단위의 json을 만들수있는데..
-
-        GsonBuilder builder = new GsonBuilder();
-        builder.excludeFieldsWithoutExposeAnnotation();
-        Gson gson = builder.create();
 
         OrganJson organJson = new OrganJson();
-        organJson.setOrganList(organList);
-        String str = gson.toJson(organJson, OrganJson.class);
-        System.out.println(">>>>>>>>" + str);
+        String resultJson = organJson.toJsonOrganList(organList);
+        System.out.println(resultJson);
     }
 
     @Ignore

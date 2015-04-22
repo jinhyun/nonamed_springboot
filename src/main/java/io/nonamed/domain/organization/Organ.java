@@ -1,6 +1,5 @@
 package io.nonamed.domain.organization;
 
-import com.google.gson.annotations.Expose;
 import io.nonamed.domain.department.Dept;
 import io.nonamed.domain.user.User;
 
@@ -9,27 +8,22 @@ import javax.persistence.*;
 @Entity
 @Table(name = "ORGAN")
 public class Organ {
-    @Expose
     @Id
     @Column(name = "ORGAN_ID")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int organId;
 
-    @Expose
     @Column(name = "ORGAN_DEPT_NAME")
     private String organDeptName;
 
-    @Expose
     @ManyToOne
     @JoinColumn(name="USER_ID")
     private User users;
 
-    @Expose
     @ManyToOne
     @JoinColumn(name="DEPT_CODE")
     private Dept depts;
 
-    @Expose
     @Column(name="ORGAN_DEPT_LOCATION")
     private String organDeptLocation;
 
