@@ -1,5 +1,6 @@
 package io.nonamed.domain.department;
 
+import com.google.gson.annotations.Expose;
 import io.nonamed.domain.organization.Organ;
 
 import javax.persistence.*;
@@ -9,16 +10,20 @@ import java.util.ArrayList;
 @Entity
 @Table(name="DEPT")
 public class Dept {
+    @Expose
     @Id
     @Column(name="DEPT_CODE")
     private String deptCode;
 
+    @Expose
     @Column(name="DEPT_NAME")
     private String deptName;
 
+    @Expose
     @Column(name="DEPT_LOCATION")
     private String deptLocation;
 
+    @Expose(serialize = false, deserialize = false)
     @OneToMany(mappedBy="depts", cascade=CascadeType.ALL)
     List<Organ> organList = new ArrayList<>();
 

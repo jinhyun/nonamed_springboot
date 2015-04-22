@@ -1,17 +1,22 @@
 package io.nonamed;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import io.nonamed.dao.department.DeptRepository;
 import io.nonamed.dao.organization.OrganRepository;
 import io.nonamed.dao.user.UserRepository;
 import io.nonamed.domain.department.Dept;
-import io.nonamed.domain.organization.Organ;
+import io.nonamed.domain.organization.*;
 import io.nonamed.domain.user.User;
+import io.nonamed.service.organization.OrganService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.boot.test.TestRestTemplate;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.RestTemplate;
 import org.junit.*;
+
+import java.util.List;
 
 import static junit.framework.TestCase.assertNotNull;
 import static org.hamcrest.Matchers.containsString;
@@ -29,6 +34,8 @@ public class AppTests {
     OrganRepository organRepository;
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    OrganService organService;
 
     RestTemplate template = new TestRestTemplate();
     String indexUrl = "http://localhost:8080";
@@ -134,8 +141,26 @@ public class AppTests {
     }
 
     @Test
+    public void getOrganAllList() {
+        insertOrgan_initData();
+        List<Organ> organList = organService.getOrganAllList();
+        // TODO: <Organ>형을 변경할수 있어야 파일단위의 json을 만들수있는데..
+
+        GsonBuilder builder = new GsonBuilder();
+        builder.excludeFieldsWithoutExposeAnnotation();
+        Gson gson = builder.create();
+
+        OrganJson organJson = new OrganJson();
+        organJson.setOrganList(organList);
+        String str = gson.toJson(organJson, OrganJson.class);
+        System.out.println(">>>>>>>>" + str);
+    }
+
+    @Ignore
+    @Test
     public void insertOrgan_initData() {
         // Tree
+        System.out.println(">>> Start Insert Init Data <<<");
         insertDeptAndOrgan("d1000", "Nonamed Company", "d1000");
             insertUserAndOrgan("ceo", "노미정", "d1000");
             insertDeptAndOrgan("d1001", "경영지원", "d1001, d1000");
@@ -150,7 +175,7 @@ public class AppTests {
                 insertUserAndOrgan("threeTeamLeader", "3팀장", "d1005");
                 insertUserAndOrgan("threeTeamBasicDeveloper", "3팀초급개발자", "d1005");
             insertDeptAndOrgan("d1006", "운영본부", "d1006, d1002, d1000");
-        System.out.println("ok");
+        System.out.println(">>> End Insert Init Data <<<");
     }
 
     public void insertUserAndOrgan(String userId, String userName, String deptCode) {
@@ -170,7 +195,6 @@ public class AppTests {
         organ.setUsers(user);   // select user
         organ.setDepts(dbDept); // select dbDept
         organRepository.save(organ);
-        System.out.println("ok");
     }
 
     public void insertDeptAndOrgan(
@@ -190,6 +214,5 @@ public class AppTests {
         organ.setOrganDeptLocation(deptLocation);
         organ.setDepts(dbDept);
         organRepository.save(organ);
-        System.out.println("ok");
     }
 }

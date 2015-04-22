@@ -51,6 +51,8 @@ dependencies {
 
     runtime("mysql:mysql-connector-java")
     testCompile("org.springframework.boot:spring-boot-starter-test")
+
+    compile 'com.google.code.gson:gson:1.7.2'
 }
 
 eclipse {
