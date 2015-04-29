@@ -23,9 +23,14 @@ public class Dept {
     @Column(name="DEPT_LOCATION")
     private String deptLocation;
 
+    @Expose
+    @Column(name="UP_DEPT_LOCATION")
+    private String upDeptLocation;
+
     @Expose(serialize = false, deserialize = false)
     @OneToMany(mappedBy="depts", cascade=CascadeType.ALL)
     List<Organ> organList = new ArrayList<>();
+    private int upDeptCnt;
 
     public String getDeptCode() {
         return deptCode;
@@ -51,11 +56,27 @@ public class Dept {
         this.deptLocation = deptLocation;
     }
 
+    public String getUpDeptLocation() {
+        return upDeptLocation;
+    }
+
+    public void setUpDeptLocation(String upDeptLocation) {
+        this.upDeptLocation = upDeptLocation;
+    }
+
     public List<Organ> getOrganList() {
         return organList;
     }
 
     public void setOrganList(List<Organ> organList) {
         this.organList = organList;
+    }
+
+    public void setUpDeptCnt(int upDeptCnt) {
+        this.upDeptCnt = upDeptCnt;
+    }
+
+    public int getUpDeptCnt() {
+        return upDeptCnt;
     }
 }

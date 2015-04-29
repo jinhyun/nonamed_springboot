@@ -32,22 +32,26 @@ public class OrganJson {
                                                                  organList) {
         List<InnerOrgan> innerOrganList = new ArrayList<>();
 
-        for(Organ organ : organList){
+        for (Organ organ : organList) {
             InnerOrgan innerOrgan = new InnerOrgan();
             innerOrgan.setOrganDeptName(organ.getOrganDeptName());
             innerOrgan.setOrganId(organ.getOrganId());
             innerOrgan.setOrganDeptLocation(organ.getOrganDeptLocation());
-            if (organ.getDepts() != null){
+            innerOrgan.setOrganUpDeptLocation(organ.getOrganUpDeptLocation());
+            innerOrgan.setOrganUpDeptCnt(organ.getOrganUpDeptCnt());
+            if (organ.getDepts() != null) {
                 Dept dept = organ.getDepts();
 
                 InnerDept innerDept = new InnerDept();
                 innerDept.setDeptCode(dept.getDeptCode());
                 innerDept.setDeptLocation(dept.getDeptLocation());
                 innerDept.setDeptName(dept.getDeptName());
+                innerDept.setUpDeptCnt(dept.getUpDeptCnt());
+                innerDept.setUpDeptLocation(dept.getUpDeptLocation());
 
                 innerOrgan.setDepts(innerDept);
             }
-            if (organ.getUsers() != null){
+            if (organ.getUsers() != null) {
                 User user = organ.getUsers();
 
                 InnerUser innerUser = new InnerUser();
@@ -68,6 +72,10 @@ public class OrganJson {
         private String deptName;
         @Expose
         private String deptLocation;
+        @Expose
+        private int upDeptCnt;
+        @Expose
+        private String upDeptLocation;
 
         public void setDeptCode(String deptCode) {
             this.deptCode = deptCode;
@@ -79,6 +87,22 @@ public class OrganJson {
 
         public void setDeptLocation(String deptLocation) {
             this.deptLocation = deptLocation;
+        }
+
+        public void setUpDeptCnt(int upDeptCnt) {
+            this.upDeptCnt = upDeptCnt;
+        }
+
+        public int getUpDeptCnt() {
+            return upDeptCnt;
+        }
+
+        public void setUpDeptLocation(String upDeptLocation) {
+            this.upDeptLocation = upDeptLocation;
+        }
+
+        public String getUpDeptLocation() {
+            return upDeptLocation;
         }
     }
 
@@ -108,6 +132,10 @@ public class OrganJson {
         private InnerDept depts;
         @Expose
         private String organDeptLocation;
+        @Expose
+        private String organUpDeptLocation;
+        @Expose
+        private int organUpDeptCnt;
 
         public void setOrganId(int organId) {
             this.organId = organId;
@@ -127,6 +155,22 @@ public class OrganJson {
 
         public void setOrganDeptLocation(String organDeptLocation) {
             this.organDeptLocation = organDeptLocation;
+        }
+
+        public void setOrganUpDeptLocation(String organUpDeptLocation) {
+            this.organUpDeptLocation = organUpDeptLocation;
+        }
+
+        public String getOrganUpDeptLocation() {
+            return organUpDeptLocation;
+        }
+
+        public void setOrganUpDeptCnt(int organUpDeptCnt) {
+            this.organUpDeptCnt = organUpDeptCnt;
+        }
+
+        public int getOrganUpDeptCnt() {
+            return organUpDeptCnt;
         }
     }
 }
