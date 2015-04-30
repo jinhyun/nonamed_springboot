@@ -27,6 +27,10 @@ public class Organ {
     @Column(name="ORGAN_DEPT_LOCATION")
     private String organDeptLocation;
 
+    @Column(name="ORGAN_UP_DEPT_LOCATION")
+    private String organUpDeptLocation;
+    private int organUpDeptCnt;
+
     //TODO - Need Code: User or Dept
 
     public int getOrganId() {
@@ -67,5 +71,21 @@ public class Organ {
 
     public void setOrganDeptLocation(String organDeptLocation) {
         this.organDeptLocation = organDeptLocation;
+    }
+
+    public void setOrganUpDeptLocation(String organUpDeptLocation) {
+        this.organUpDeptLocation = organUpDeptLocation;
+    }
+
+    public String getOrganUpDeptLocation() {
+        return organUpDeptLocation;
+    }
+
+    public void setOrganUpDeptCnt(int organUpDeptCnt) {
+        this.organUpDeptCnt = organUpDeptCnt;
+    }
+
+    public int getOrganUpDeptCnt() {
+        return organUpDeptCnt;
     }
 }
