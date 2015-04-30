@@ -33,7 +33,7 @@
                  class="sidebar-nav navbar-collapse"
                  style="width:400px; background-color: #F8F8F8">
 
-                <ul id="ul_root" class="nav"></ul>
+                <ul class="nav" id="ul_root"></ul>
 
                 <%--<ul class="nav" id="side-menu">
                     <li>
@@ -42,7 +42,7 @@
                             <li>
                                 <a href="#"><i class="fa fa-user fa-fw"></i>CEO</a>
                             </li>
-                            <li>
+                            <li id="li_d1002">
                                 <a href="#"><i class="fa fa-group fa-fw"></i>개발본부<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
                                     <li>
@@ -94,214 +94,250 @@
                     if ("root" == organBelongDeptId){
                         var li = document.createElement("li");
                         var a = document.createElement("a");
+                        var i = document.createElement("i");
+                        i.className = "fa fa-sitemap fa-fw";
                         var txt = document.createTextNode(organInfo.organDeptNameUserName);
+                        var span = document.createElement("span");
+                        span.className = "fa arrow";
 
+                        a.href = "#";
+                        a.appendChild(i);
                         a.appendChild(txt);
                         li.appendChild(a);
-                        a.id = "a_"+organInfo.organDeptIdUserNo;
+                        $(span).insertAfter(txt);
+                        li.id = "li_"+organInfo.organDeptIdUserNo;
+                        li.className="active";
 
                         $("#ul_"+organBelongDeptId).append(li.outerHTML);
+//                        $("#ul_root").append(li.outerHTML);
+//                        debugger;
+
                     } else if (beforeOrganUpDeptsCnt != organUpDeptsCnt){
                         // upLevel or downLevel
                         // organUpDeptsCnt값이 다르면 a_id:organBelongDeptId검색후 ul생성(ul_id:organBelongDeptId) li생성(a_id:organDeptIdUserNo)
                         var ul = document.createElement("ul");
+//                        ul.className = "nav nav-2-level";  //need modify
+                        ul.className = "nav nav-" + organUpDeptsCnt + "-level";  //need modify
                         var li = document.createElement("li");
                         var a = document.createElement("a");
+                        var i = document.createElement("i");
+                        if (organInfo.organCode == "user"){
+                            i.className = "fa fa-user fa-fw";
+                        } else if (organInfo.organCode == "dept"){
+                            i.className = "fa fa-users fa-fw";
+                        }
                         var txt = document.createTextNode(organInfo.organDeptNameUserName);
+                        var span = document.createElement("span");
+                        span.className = "fa arrow";
 
+                        a.href = "#";
+                        a.appendChild(i);
                         a.appendChild(txt);
                         li.appendChild(a);
                         ul.appendChild(li);
                         ul.id = "ul_"+organBelongDeptId;
+                        if (organInfo.organCode == "dept"){
+                            $(span).insertAfter(txt);
+                        }
+                        li.id = "li_"+organInfo.organDeptIdUserNo;
 
-                        $("#a_"+organBelongDeptId).append(ul.outerHTML);
+                        $("#li_"+organBelongDeptId).append(ul.outerHTML);
+
                     } else if (beforeOrganUpDeptsCnt == organUpDeptsCnt){
                         // sameLevel
                         // organUpDeptsCnt값이 동일하면 ul_id:organBelongDeptId검색후 li생성(a_id:organDeptIdUserNo)
                         var li = document.createElement("li");
                         var a = document.createElement("a");
+                        var i = document.createElement("i");
+                        if (organInfo.organCode == "user"){
+                            i.className = "fa fa-user fa-fw";
+                        } else if (organInfo.organCode == "dept"){
+                            i.className = "fa fa-users fa-fw";
+                        }
                         var txt = document.createTextNode(organInfo.organDeptNameUserName);
+                        var span = document.createElement("span");
+                        span.className = "fa arrow";
 
+                        a.href = "#";
+                        a.appendChild(i);
                         a.appendChild(txt);
                         li.appendChild(a);
-                        a.id = "a_"+organInfo.organDeptIdUserNo;
+                        li.id = "li_"+organInfo.organDeptIdUserNo;
+                        if (organInfo.organCode == "dept"){
+                            $(span).insertAfter(txt);
+                        }
 
                         $("#ul_"+organBelongDeptId).append(li.outerHTML);
+//                        debugger;
+
                     } else {
                         console.log("Exception");
                     }
                     beforeOrganUpDeptsCnt = organUpDeptsCnt;
                 });
             });
+
+            $('#ul_root').metisMenu();
         }
-            /*
-            organId
-            organBelongDeptId
-            organDeptIdUserNo
-            organDeptNameUserName
-            organUpDepts
-            organUpDeptsCnt (depth) 차이가 생기면 uplevel or downlevel
-                users.userId
-                depts.deptId
-             */
-            /*
-            <ul id="ul_organTree">
-                <li id="li_organTree>
-                    <a id="a_d1000">Nonamed Company</a>     a_organDeptIdUserNo
-                    organUpDeptsCnt값이 다르면 a_id:organBelongDeptId검색후 ul생성(ul_id:organBelongDeptId) li생성(a_id:organDeptIdUserNo)
-                    organUpDeptsCnt값이 동일하면 ul_id:organBelongDeptId검색후 li생성(a_id:organDeptIdUserNo)
-                        <ul id="ul_d1000">
-                            <li>
-                                <a id="a_u0001">CEO</a>
-                            </li>
-                            <li>
-                                <a id="a_d1001">경영본부</a>
-                            </li>
-                            <li>
-                                <a id="a_d1002">개발본부</a>
-                                    <ul id="ul_d1002">
-                                        <li>
-                                            <a>개발본부장</a>
-                                        </li>
-                                        <li>
-                                            <a>개발1팀</a>
-                                        </li>
-                                        <li>
-                                            <a>개발2팀</a>
-                                        </li>
-                                    </ul>
-                            </li>
-                            <li>
-                                <a>운영본부</a>
-                            </li>
-                        </ul>
-                </li>
-            </ul>
-            */
+        
         function initData(){
             var data =
-            [
-                "{",
-                "  \"organJsonList\": [",
-                "    {",
-                "      \"organId\": 1,",
-                "      \"organBelongDeptId\": \"root\",",
-                "      \"organDeptIdUserNo\": \"d1000\",",
-                "      \"organDeptNameUserName\": \"Nonamed Company\",",
-                "      \"organUpDepts\": \"root\",",
-                "      \"organUpDeptsCnt\": 1,",
-                "      \"organCode\": \"dept\",",
-                "      \"depts\": {",
-                "        \"deptId\": \"d1000\",",
-                "        \"deptName\": \"Nonamed Company\"",
-                "      }",
-                "    },",
-                "    {",
-                "      \"organId\": 2,",
-                "      \"organBelongDeptId\": \"d1000\",",
-                "      \"organDeptIdUserNo\": \"u1\",",
-                "      \"organDeptNameUserName\": \"노미정\",",
-                "      \"organUpDepts\": \"d1000, root\",",
-                "      \"organUpDeptsCnt\": 2,",
-                "      \"organCode\": \"user\",",
-                "      \"depts\": {",
-                "        \"deptId\": \"d1000\",",
-                "        \"deptName\": \"Nonamed Company\"",
-                "      },",
-                "      \"users\": {",
-                "        \"userId\": \"u1\",",
-                "        \"userName\": \"노미정\"",
-                "      }",
-                "    },",
-                "    {",
-                "      \"organId\": 3,",
-                "      \"organBelongDeptId\": \"d1000\",",
-                "      \"organDeptIdUserNo\": \"d1001\",",
-                "      \"organDeptNameUserName\": \"경영지원본부\",",
-                "      \"organUpDepts\": \"d1000, root\",",
-                "      \"organUpDeptsCnt\": 2,",
-                "      \"organCode\": \"dept\",",
-                "      \"depts\": {",
-                "        \"deptId\": \"d1001\",",
-                "        \"deptName\": \"경영지원본부\"",
-                "      }",
-                "    },",
-                "    {",
-                "      \"organId\": 4,",
-                "      \"organBelongDeptId\": \"d1000\",",
-                "      \"organDeptIdUserNo\": \"d1002\",",
-                "      \"organDeptNameUserName\": \"개발본부\",",
-                "      \"organUpDepts\": \"d1000, root\",",
-                "      \"organUpDeptsCnt\": 2,",
-                "      \"organCode\": \"dept\",",
-                "      \"depts\": {",
-                "        \"deptId\": \"d1002\",",
-                "        \"deptName\": \"개발본부\"",
-                "      }",
-                "    },",
-                "    {",
-                "      \"organId\": 5,",
-                "      \"organBelongDeptId\": \"d1002\",",
-                "      \"organDeptIdUserNo\": \"u2\",",
-                "      \"organDeptNameUserName\": \"개발본부장\",",
-                "      \"organUpDepts\": \"d1002, d1000, root\",",
-                "      \"organUpDeptsCnt\": 3,",
-                "      \"organCode\": \"user\",",
-                "      \"depts\": {",
-                "        \"deptId\": \"d1002\",",
-                "        \"deptName\": \"개발본부\"",
-                "      },",
-                "      \"users\": {",
-                "        \"userId\": \"u2\",",
-                "        \"userName\": \"개발본부장\"",
-                "      }",
-                "    },",
-                "    {",
-                "      \"organId\": 6,",
-                "      \"organBelongDeptId\": \"d1002\",",
-                "      \"organDeptIdUserNo\": \"d1003\",",
-                "      \"organDeptNameUserName\": \"개발1팀\",",
-                "      \"organUpDepts\": \"d1002, d1000, root\",",
-                "      \"organUpDeptsCnt\": 3,",
-                "      \"organCode\": \"dept\",",
-                "      \"depts\": {",
-                "        \"deptId\": \"d1003\",",
-                "        \"deptName\": \"개발1팀\"",
-                "      }",
-                "    },",
-                "    {",
-                "      \"organId\": 7,",
-                "      \"organBelongDeptId\": \"d1003\",",
-                "      \"organDeptIdUserNo\": \"u3\",",
-                "      \"organDeptNameUserName\": \"1팀장\",",
-                "      \"organUpDepts\": \"d1003, d1002, d1000, root\",",
-                "      \"organUpDeptsCnt\": 4,",
-                "      \"organCode\": \"user\",",
-                "      \"depts\": {",
-                "        \"deptId\": \"d1003\",",
-                "        \"deptName\": \"개발1팀\"",
-                "      },",
-                "      \"user\": {",
-                "      	\"userId\": \"u3\",",
-                "        \"userName\": \"1팀장\"",
-                "      }",
-                "    },",
-                "    {",
-                "      \"organId\": 8,",
-                "      \"organBelongDeptId\": \"d1000\",",
-                "      \"organDeptIdUserNo\": \"d1006\",",
-                "      \"organDeptNameUserName\": \"운영본부\",",
-                "      \"organUpDepts\": \"d1000, root\",",
-                "      \"organUpDeptsCnt\": 2,",
-                "      \"organCode\": \"dept\",",
-                "      \"depts\": {",
-                "        \"deptId\": \"d1006\",",
-                "        \"deptName\": \"운영본부\"",
-                "      }",
-                "    }",
-                "  ]",
-                "}"
-            ].join('');
+                [
+                    "{",
+                    "  \"organJsonList\": [",
+                    "    {",
+                    "      \"organId\": 1,",
+                    "      \"organBelongDeptId\": \"root\",",
+                    "      \"organDeptIdUserNo\": \"d1000\",",
+                    "      \"organDeptNameUserName\": \"Nonamed Company\",",
+                    "      \"organUpDepts\": \"root\",",
+                    "      \"organUpDeptsCnt\": 1,",
+                    "      \"organCode\": \"dept\",",
+                    "      \"depts\": {",
+                    "        \"deptId\": \"d1000\",",
+                    "        \"deptName\": \"Nonamed Company\"",
+                    "      }",
+                    "    },",
+                    "    {",
+                    "      \"organId\": 2,",
+                    "      \"organBelongDeptId\": \"d1000\",",
+                    "      \"organDeptIdUserNo\": \"u1\",",
+                    "      \"organDeptNameUserName\": \"CEO\",",
+                    "      \"organUpDepts\": \"d1000, root\",",
+                    "      \"organUpDeptsCnt\": 2,",
+                    "      \"organCode\": \"user\",",
+                    "      \"depts\": {",
+                    "        \"deptId\": \"d1000\",",
+                    "        \"deptName\": \"Nonamed Company\"",
+                    "      },",
+                    "      \"users\": {",
+                    "        \"userId\": \"u1\",",
+                    "        \"userName\": \"CEO\"",
+                    "      }",
+                    "    },",
+                    "    {",
+                    "      \"organId\": 3,",
+                    "      \"organBelongDeptId\": \"d1000\",",
+                    "      \"organDeptIdUserNo\": \"d1001\",",
+                    "      \"organDeptNameUserName\": \"경영지원본부\",",
+                    "      \"organUpDepts\": \"d1000, root\",",
+                    "      \"organUpDeptsCnt\": 2,",
+                    "      \"organCode\": \"dept\",",
+                    "      \"depts\": {",
+                    "        \"deptId\": \"d1001\",",
+                    "        \"deptName\": \"경영지원본부\"",
+                    "      }",
+                    "    },",
+                    "    {",
+                    "      \"organId\": 4,",
+                    "      \"organBelongDeptId\": \"d1001\",",
+                    "      \"organDeptIdUserNo\": \"u2\",",
+                    "      \"organDeptNameUserName\": \"경영지원본부장\",",
+                    "      \"organUpDepts\": \"d1001, d1000, root\",",
+                    "      \"organUpDeptsCnt\": 3,",
+                    "      \"organCode\": \"user\",",
+                    "      \"depts\": {",
+                    "        \"deptId\": \"d1001\",",
+                    "        \"deptName\": \"경영본부\"",
+                    "      },",
+                    "      \"users\": {",
+                    "        \"userId\": \"u2\",",
+                    "        \"userName\": \"경영지원본부장\"",
+                    "      }",
+                    "    },",
+                    "    {",
+                    "      \"organId\": 5,",
+                    "      \"organBelongDeptId\": \"d1000\",",
+                    "      \"organDeptIdUserNo\": \"d1002\",",
+                    "      \"organDeptNameUserName\": \"개발본부\",",
+                    "      \"organUpDepts\": \"d1000, root\",",
+                    "      \"organUpDeptsCnt\": 2,",
+                    "      \"organCode\": \"dept\",",
+                    "      \"depts\": {",
+                    "        \"deptId\": \"d1002\",",
+                    "        \"deptName\": \"개발본부\"",
+                    "      }",
+                    "    },",
+                    "    {",
+                    "      \"organId\": 6,",
+                    "      \"organBelongDeptId\": \"d1002\",",
+                    "      \"organDeptIdUserNo\": \"u2\",",
+                    "      \"organDeptNameUserName\": \"개발본부장\",",
+                    "      \"organUpDepts\": \"d1002, d1000, root\",",
+                    "      \"organUpDeptsCnt\": 3,",
+                    "      \"organCode\": \"user\",",
+                    "      \"depts\": {",
+                    "        \"deptId\": \"d1002\",",
+                    "        \"deptName\": \"개발본부\"",
+                    "      },",
+                    "      \"users\": {",
+                    "        \"userId\": \"u3\",",
+                    "        \"userName\": \"개발본부장\"",
+                    "      }",
+                    "    },",
+                    "    {",
+                    "      \"organId\": 7,",
+                    "      \"organBelongDeptId\": \"d1002\",",
+                    "      \"organDeptIdUserNo\": \"d1003\",",
+                    "      \"organDeptNameUserName\": \"개발1팀\",",
+                    "      \"organUpDepts\": \"d1002, d1000, root\",",
+                    "      \"organUpDeptsCnt\": 3,",
+                    "      \"organCode\": \"dept\",",
+                    "      \"depts\": {",
+                    "        \"deptId\": \"d1003\",",
+                    "        \"deptName\": \"개발1팀\"",
+                    "      }",
+                    "    },",
+                    "    {",
+                    "      \"organId\": 8,",
+                    "      \"organBelongDeptId\": \"d1003\",",
+                    "      \"organDeptIdUserNo\": \"u3\",",
+                    "      \"organDeptNameUserName\": \"1팀장\",",
+                    "      \"organUpDepts\": \"d1003, d1002, d1000, root\",",
+                    "      \"organUpDeptsCnt\": 4,",
+                    "      \"organCode\": \"user\",",
+                    "      \"depts\": {",
+                    "        \"deptId\": \"d1003\",",
+                    "        \"deptName\": \"개발1팀\"",
+                    "      },",
+                    "      \"user\": {",
+                    "      	\"userId\": \"u4\",",
+                    "        \"userName\": \"1팀장\"",
+                    "      }",
+                    "    },",
+                    "    {",
+                    "      \"organId\": 9,",
+                    "      \"organBelongDeptId\": \"d1000\",",
+                    "      \"organDeptIdUserNo\": \"d1006\",",
+                    "      \"organDeptNameUserName\": \"운영본부\",",
+                    "      \"organUpDepts\": \"d1000, root\",",
+                    "      \"organUpDeptsCnt\": 2,",
+                    "      \"organCode\": \"dept\",",
+                    "      \"depts\": {",
+                    "        \"deptId\": \"d1006\",",
+                    "        \"deptName\": \"운영본부\"",
+                    "      }",
+                    "    },",
+                    "    {",
+                    "      \"organId\": 10,",
+                    "      \"organBelongDeptId\": \"d1006\",",
+                    "      \"organDeptIdUserNo\": \"u5\",",
+                    "      \"organDeptNameUserName\": \"운영본부장\",",
+                    "      \"organUpDepts\": \"d1006, d1000, root\",",
+                    "      \"organUpDeptsCnt\": 3,",
+                    "      \"organCode\": \"user\",",
+                    "      \"depts\": {",
+                    "        \"deptId\": \"d1006\",",
+                    "        \"deptName\": \"운영본부\"",
+                    "      },",
+                    "      \"user\": {",
+                    "      	\"userId\": \"u5\",",
+                    "        \"userName\": \"운영본부장\"",
+                    "      }",
+                    "    }",
+                    "  ]",
+                    "}"
+                ].join('');
             return data;
         }
     </script>
