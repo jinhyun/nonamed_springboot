@@ -42,6 +42,94 @@
     <script src="/resources/bootstrap/bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
     <script type="application/javascript">
+        var isRootLevel = function(organInfo){
+            return (organInfo.organBelongDeptId == "root") ? true:false;
+        };
+
+        var isSameLevel = function(organInfo, beforeOrganUpDeptsCnt){
+            return (beforeOrganUpDeptsCnt == organInfo.organUpDeptsCnt) ? true:false;
+        };
+
+        var isUpLevelOrDownLevel = function(organInfo, beforeOrganUpDeptsCnt){
+            return (beforeOrganUpDeptsCnt != organInfo.organUpDeptsCnt) ? true:false;
+        };
+
+        var rootLevel = function(organInfo){
+            var li = document.createElement("li");
+            var a = document.createElement("a");
+            var i = document.createElement("i");
+            i.className = "fa fa-sitemap fa-fw";
+            var txt = document.createTextNode(organInfo.organDeptNameUserName);
+            var span = document.createElement("span");
+            span.className = "fa arrow";
+
+            a.href = "#";
+            a.appendChild(i);
+            a.appendChild(txt);
+            li.appendChild(a);
+            $(span).insertAfter(txt);
+            li.id = "li_"+organInfo.organDeptIdUserNo;
+            li.className="active";
+
+            $("#ul_"+organInfo.organBelongDeptId).append(li.outerHTML);
+        };
+
+        var sameLevel = function(organInfo){
+            // organUpDeptsCnt값이 동일하면 ul_id:organBelongDeptId검색후 li생성(a_id:organDeptIdUserNo)
+            var li = document.createElement("li");
+            var a = document.createElement("a");
+            var i = document.createElement("i");
+            if (organInfo.organCode == "user"){
+                i.className = "fa fa-user fa-fw";
+            } else if (organInfo.organCode == "dept"){
+                i.className = "fa fa-users fa-fw";
+            }
+            var txt = document.createTextNode(organInfo.organDeptNameUserName);
+            var span = document.createElement("span");
+            span.className = "fa arrow";
+
+            a.href = "#";
+            a.appendChild(i);
+            a.appendChild(txt);
+            li.appendChild(a);
+            li.id = "li_"+organInfo.organDeptIdUserNo;
+            if (organInfo.organCode == "dept"){
+                $(span).insertAfter(txt);
+            }
+
+            $("#ul_"+organInfo.organBelongDeptId).append(li.outerHTML);
+        };
+
+        var upLevelOrDownLevel = function(organInfo){
+            // organUpDeptsCnt값이 다르면 li_id:organBelongDeptId검색후 ul생성(ul_id:organBelongDeptId) li생성(a_id:organDeptIdUserNo)
+            var ul = document.createElement("ul");
+            ul.className = "nav nav-" + organInfo.organUpDeptsCnt + "-level";
+            var li = document.createElement("li");
+            var a = document.createElement("a");
+            var i = document.createElement("i");
+            if (organInfo.organCode == "user"){
+                i.className = "fa fa-user fa-fw";
+            } else if (organInfo.organCode == "dept"){
+                i.className = "fa fa-users fa-fw";
+            }
+            var txt = document.createTextNode(organInfo.organDeptNameUserName);
+            var span = document.createElement("span");
+            span.className = "fa arrow";
+
+            a.href = "#";
+            a.appendChild(i);
+            a.appendChild(txt);
+            li.appendChild(a);
+            ul.appendChild(li);
+            ul.id = "ul_"+organInfo.organBelongDeptId;
+            if (organInfo.organCode == "dept"){
+                $(span).insertAfter(txt);
+            }
+            li.id = "li_"+organInfo.organDeptIdUserNo;
+
+            $("#li_"+organInfo.organBelongDeptId).append(ul.outerHTML);
+        };
+
         function fnInit() {
 //            var organJsonValue = document.getElementById("organJson").value;
             var organJson = $.parseJSON(initData());
@@ -49,90 +137,19 @@
 
             $.each(organJson, function (key, value) {
                 $.each(value, function (i, organInfo) {
-                    var organBelongDeptId = organInfo.organBelongDeptId;
-                    var organDeptNameUserName = organInfo.organDeptNameUserName;
-                    var organUpDeptsCnt = organInfo.organUpDeptsCnt;
+                    if (isRootLevel(organInfo)){
+                        rootLevel(organInfo);
 
-                    if ("root" == organBelongDeptId){
-                        var li = document.createElement("li");
-                        var a = document.createElement("a");
-                        var i = document.createElement("i");
-                        i.className = "fa fa-sitemap fa-fw";
-                        var txt = document.createTextNode(organInfo.organDeptNameUserName);
-                        var span = document.createElement("span");
-                        span.className = "fa arrow";
+                    } else if (isUpLevelOrDownLevel(organInfo, beforeOrganUpDeptsCnt)){
+                        upLevelOrDownLevel(organInfo);
 
-                        a.href = "#";
-                        a.appendChild(i);
-                        a.appendChild(txt);
-                        li.appendChild(a);
-                        $(span).insertAfter(txt);
-                        li.id = "li_"+organInfo.organDeptIdUserNo;
-                        li.className="active";
-
-                        $("#ul_"+organBelongDeptId).append(li.outerHTML);
-
-                    } else if (beforeOrganUpDeptsCnt != organUpDeptsCnt){
-                        // upLevel or downLevel
-                        // organUpDeptsCnt값이 다르면 a_id:organBelongDeptId검색후 ul생성(ul_id:organBelongDeptId) li생성(a_id:organDeptIdUserNo)
-                        var ul = document.createElement("ul");
-//                        ul.className = "nav nav-2-level";  //need modify
-                        ul.className = "nav nav-" + organUpDeptsCnt + "-level";  //need modify
-                        var li = document.createElement("li");
-                        var a = document.createElement("a");
-                        var i = document.createElement("i");
-                        if (organInfo.organCode == "user"){
-                            i.className = "fa fa-user fa-fw";
-                        } else if (organInfo.organCode == "dept"){
-                            i.className = "fa fa-users fa-fw";
-                        }
-                        var txt = document.createTextNode(organInfo.organDeptNameUserName);
-                        var span = document.createElement("span");
-                        span.className = "fa arrow";
-
-                        a.href = "#";
-                        a.appendChild(i);
-                        a.appendChild(txt);
-                        li.appendChild(a);
-                        ul.appendChild(li);
-                        ul.id = "ul_"+organBelongDeptId;
-                        if (organInfo.organCode == "dept"){
-                            $(span).insertAfter(txt);
-                        }
-                        li.id = "li_"+organInfo.organDeptIdUserNo;
-
-                        $("#li_"+organBelongDeptId).append(ul.outerHTML);
-
-                    } else if (beforeOrganUpDeptsCnt == organUpDeptsCnt){
-                        // sameLevel
-                        // organUpDeptsCnt값이 동일하면 ul_id:organBelongDeptId검색후 li생성(a_id:organDeptIdUserNo)
-                        var li = document.createElement("li");
-                        var a = document.createElement("a");
-                        var i = document.createElement("i");
-                        if (organInfo.organCode == "user"){
-                            i.className = "fa fa-user fa-fw";
-                        } else if (organInfo.organCode == "dept"){
-                            i.className = "fa fa-users fa-fw";
-                        }
-                        var txt = document.createTextNode(organInfo.organDeptNameUserName);
-                        var span = document.createElement("span");
-                        span.className = "fa arrow";
-
-                        a.href = "#";
-                        a.appendChild(i);
-                        a.appendChild(txt);
-                        li.appendChild(a);
-                        li.id = "li_"+organInfo.organDeptIdUserNo;
-                        if (organInfo.organCode == "dept"){
-                            $(span).insertAfter(txt);
-                        }
-
-                        $("#ul_"+organBelongDeptId).append(li.outerHTML);
+                    } else if (isSameLevel(organInfo, beforeOrganUpDeptsCnt)){
+                        sameLevel(organInfo);
 
                     } else {
                         console.log("Exception");
                     }
-                    beforeOrganUpDeptsCnt = organUpDeptsCnt;
+                    beforeOrganUpDeptsCnt = organInfo.organUpDeptsCnt;
                 });
             });
 
