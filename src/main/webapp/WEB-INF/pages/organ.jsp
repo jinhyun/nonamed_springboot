@@ -54,7 +54,7 @@
             return (beforeOrganUpDeptsCnt != organInfo.organUpDeptsCnt) ? true:false;
         };
 
-        var rootLevel = function(organInfo){
+        var createRootLevel = function(organInfo){
             var li = document.createElement("li");
             var a = document.createElement("a");
             var i = document.createElement("i");
@@ -74,7 +74,7 @@
             $("#ul_"+organInfo.organBelongDeptId).append(li.outerHTML);
         };
 
-        var sameLevel = function(organInfo){
+        var createSameLevel = function(organInfo){
             // organUpDeptsCnt값이 동일하면 ul_id:organBelongDeptId검색후 li생성(a_id:organDeptIdUserNo)
             var li = document.createElement("li");
             var a = document.createElement("a");
@@ -100,7 +100,7 @@
             $("#ul_"+organInfo.organBelongDeptId).append(li.outerHTML);
         };
 
-        var upLevelOrDownLevel = function(organInfo){
+        var createUpLevelOrDownLevel = function(organInfo){
             // organUpDeptsCnt값이 다르면 li_id:organBelongDeptId검색후 ul생성(ul_id:organBelongDeptId) li생성(a_id:organDeptIdUserNo)
             var ul = document.createElement("ul");
             ul.className = "nav nav-" + organInfo.organUpDeptsCnt + "-level";
@@ -138,13 +138,13 @@
             $.each(organJson, function (key, value) {
                 $.each(value, function (i, organInfo) {
                     if (isRootLevel(organInfo)){
-                        rootLevel(organInfo);
+                        createRootLevel(organInfo);
 
                     } else if (isUpLevelOrDownLevel(organInfo, beforeOrganUpDeptsCnt)){
-                        upLevelOrDownLevel(organInfo);
+                        createUpLevelOrDownLevel(organInfo);
 
                     } else if (isSameLevel(organInfo, beforeOrganUpDeptsCnt)){
-                        sameLevel(organInfo);
+                        createSameLevel(organInfo);
 
                     } else {
                         console.log("Exception");
