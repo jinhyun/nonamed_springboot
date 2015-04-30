@@ -2,171 +2,295 @@
   "organJsonList": [
     {
       "organId": 1,
-      "organDeptName": "Nonamed Company",
+      "organBelongDeptId": "root",
+      "organDeptIdUserNo": "d1000",
+      "organDeptNameUserName": "Nonamed Company",
+      "organUpDepts": "root",
+      "organUpDeptsCnt": 1,
+      "organCode": "dept",
       "depts": {
-        "deptCode": "d1000",
+        "deptId": "d1000",
         "deptName": "Nonamed Company",
-        "deptLocation": "d1000"
-      },
-      "organDeptLocation": "d1000"
+        "upDepts": "root",
+        "upDeptsCnt": 1,
+        "belongDeptId": "root"
+      }
     },
     {
       "organId": 2,
-      "organDeptName": "Nonamed Company",
+      "organBelongDeptId": "d1000",
+      "organDeptIdUserNo": "no1",
+      "organDeptNameUserName": "CEO",
+      "organUpDepts": "d1000, root",
+      "organUpDeptsCnt": 2,
+      "organCode": "user",
       "users": {
-        "userId": "ceo",
-        "userName": "노미정"
+        "userId": "no1",
+        "userName": "CEO"
       },
       "depts": {
-        "deptCode": "d1000",
+        "deptId": "d1000",
         "deptName": "Nonamed Company",
-        "deptLocation": "d1000"
-      },
-      "organDeptLocation": "d1000"
+        "upDepts": "root",
+        "upDeptsCnt": 1,
+        "belongDeptId": "root"
+      }
     },
     {
       "organId": 3,
-      "organDeptName": "경영지원",
+      "organBelongDeptId": "d1000",
+      "organDeptIdUserNo": "d1001",
+      "organDeptNameUserName": "경영지원",
+      "organUpDepts": "d1000, root",
+      "organUpDeptsCnt": 2,
+      "organCode": "dept",
       "depts": {
-        "deptCode": "d1001",
+        "deptId": "d1001",
         "deptName": "경영지원",
-        "deptLocation": "d1001, d1000"
-      },
-      "organDeptLocation": "d1001, d1000"
+        "upDepts": "d1000, root",
+        "upDeptsCnt": 2,
+        "belongDeptId": "d1000"
+      }
     },
     {
       "organId": 4,
-      "organDeptName": "개발본부",
-      "depts": {
-        "deptCode": "d1002",
-        "deptName": "개발본부",
-        "deptLocation": "d1002, d1000"
+      "organBelongDeptId": "d1001",
+      "organDeptIdUserNo": "busBon",
+      "organDeptNameUserName": "경영지원본부장",
+      "organUpDepts": "d1001, d1000, root",
+      "organUpDeptsCnt": 3,
+      "organCode": "user",
+      "users": {
+        "userId": "busBon",
+        "userName": "경영지원본부장"
       },
-      "organDeptLocation": "d1002, d1000"
+      "depts": {
+        "deptId": "d1001",
+        "deptName": "경영지원",
+        "upDepts": "d1000, root",
+        "upDeptsCnt": 2,
+        "belongDeptId": "d1000"
+      }
     },
     {
       "organId": 5,
-      "organDeptName": "개발본부",
+      "organBelongDeptId": "d1000",
+      "organDeptIdUserNo": "d1002",
+      "organDeptNameUserName": "개발본부",
+      "organUpDepts": "d1000, root",
+      "organUpDeptsCnt": 2,
+      "organCode": "dept",
+      "depts": {
+        "deptId": "d1002",
+        "deptName": "개발본부",
+        "upDepts": "d1000, root",
+        "upDeptsCnt": 2,
+        "belongDeptId": "d1000"
+      }
+    },
+    {
+      "organId": 6,
+      "organBelongDeptId": "d1002",
+      "organDeptIdUserNo": "devBon",
+      "organDeptNameUserName": "개발본부장",
+      "organUpDepts": "d1002, d1000, root",
+      "organUpDeptsCnt": 3,
+      "organCode": "user",
       "users": {
         "userId": "devBon",
         "userName": "개발본부장"
       },
       "depts": {
-        "deptCode": "d1002",
+        "deptId": "d1002",
         "deptName": "개발본부",
-        "deptLocation": "d1002, d1000"
-      },
-      "organDeptLocation": "d1002, d1000"
-    },
-    {
-      "organId": 6,
-      "organDeptName": "개발1팀",
-      "depts": {
-        "deptCode": "d1003",
-        "deptName": "개발1팀",
-        "deptLocation": "d1003, d1002, d1000"
-      },
-      "organDeptLocation": "d1003, d1002, d1000"
+        "upDepts": "d1000, root",
+        "upDeptsCnt": 2,
+        "belongDeptId": "d1000"
+      }
     },
     {
       "organId": 7,
-      "organDeptName": "개발1팀",
+      "organBelongDeptId": "d1002",
+      "organDeptIdUserNo": "d1003",
+      "organDeptNameUserName": "개발1팀",
+      "organUpDepts": "d1002, d1000, root",
+      "organUpDeptsCnt": 3,
+      "organCode": "dept",
+      "depts": {
+        "deptId": "d1003",
+        "deptName": "개발1팀",
+        "upDepts": "d1002, d1000, root",
+        "upDeptsCnt": 3,
+        "belongDeptId": "d1002"
+      }
+    },
+    {
+      "organId": 8,
+      "organBelongDeptId": "d1003",
+      "organDeptIdUserNo": "oneTeamLeader",
+      "organDeptNameUserName": "1팀장",
+      "organUpDepts": "d1003, d1002, d1000, root",
+      "organUpDeptsCnt": 4,
+      "organCode": "user",
       "users": {
         "userId": "oneTeamLeader",
         "userName": "1팀장"
       },
       "depts": {
-        "deptCode": "d1003",
+        "deptId": "d1003",
         "deptName": "개발1팀",
-        "deptLocation": "d1003, d1002, d1000"
-      },
-      "organDeptLocation": "d1003, d1002, d1000"
+        "upDepts": "d1002, d1000, root",
+        "upDeptsCnt": 3,
+        "belongDeptId": "d1002"
+      }
     },
     {
-      "organId": 8,
-      "organDeptName": "개발1팀",
+      "organId": 9,
+      "organBelongDeptId": "d1003",
+      "organDeptIdUserNo": "oneTeamAdvanceDeveloper",
+      "organDeptNameUserName": "1팀고급개발자",
+      "organUpDepts": "d1003, d1002, d1000, root",
+      "organUpDeptsCnt": 4,
+      "organCode": "user",
       "users": {
         "userId": "oneTeamAdvanceDeveloper",
         "userName": "1팀고급개발자"
       },
       "depts": {
-        "deptCode": "d1003",
+        "deptId": "d1003",
         "deptName": "개발1팀",
-        "deptLocation": "d1003, d1002, d1000"
-      },
-      "organDeptLocation": "d1003, d1002, d1000"
-    },
-    {
-      "organId": 9,
-      "organDeptName": "개발2팀",
-      "depts": {
-        "deptCode": "d1004",
-        "deptName": "개발2팀",
-        "deptLocation": "d1004, d1002, d1000"
-      },
-      "organDeptLocation": "d1004, d1002, d1000"
+        "upDepts": "d1002, d1000, root",
+        "upDeptsCnt": 3,
+        "belongDeptId": "d1002"
+      }
     },
     {
       "organId": 10,
-      "organDeptName": "개발2팀",
+      "organBelongDeptId": "d1002",
+      "organDeptIdUserNo": "d1004",
+      "organDeptNameUserName": "개발2팀",
+      "organUpDepts": "d1002, d1000, root",
+      "organUpDeptsCnt": 3,
+      "organCode": "dept",
+      "depts": {
+        "deptId": "d1004",
+        "deptName": "개발2팀",
+        "upDepts": "d1002, d1000, root",
+        "upDeptsCnt": 3,
+        "belongDeptId": "d1002"
+      }
+    },
+    {
+      "organId": 11,
+      "organBelongDeptId": "d1004",
+      "organDeptIdUserNo": "twoTeamLeader",
+      "organDeptNameUserName": "2팀장",
+      "organUpDepts": "d1004, d1002, d1000, root",
+      "organUpDeptsCnt": 4,
+      "organCode": "user",
       "users": {
         "userId": "twoTeamLeader",
         "userName": "2팀장"
       },
       "depts": {
-        "deptCode": "d1004",
+        "deptId": "d1004",
         "deptName": "개발2팀",
-        "deptLocation": "d1004, d1002, d1000"
-      },
-      "organDeptLocation": "d1004, d1002, d1000"
-    },
-    {
-      "organId": 11,
-      "organDeptName": "개발3팀",
-      "depts": {
-        "deptCode": "d1005",
-        "deptName": "개발3팀",
-        "deptLocation": "d1005, d1002, d1000"
-      },
-      "organDeptLocation": "d1005, d1002, d1000"
+        "upDepts": "d1002, d1000, root",
+        "upDeptsCnt": 3,
+        "belongDeptId": "d1002"
+      }
     },
     {
       "organId": 12,
-      "organDeptName": "개발3팀",
+      "organBelongDeptId": "d1002",
+      "organDeptIdUserNo": "d1005",
+      "organDeptNameUserName": "개발3팀",
+      "organUpDepts": "d1002, d1000, root",
+      "organUpDeptsCnt": 3,
+      "organCode": "dept",
+      "depts": {
+        "deptId": "d1005",
+        "deptName": "개발3팀",
+        "upDepts": "d1002, d1000, root",
+        "upDeptsCnt": 3,
+        "belongDeptId": "d1002"
+      }
+    },
+    {
+      "organId": 13,
+      "organBelongDeptId": "d1005",
+      "organDeptIdUserNo": "threeTeamLeader",
+      "organDeptNameUserName": "3팀장",
+      "organUpDepts": "d1005, d1002, d1000, root",
+      "organUpDeptsCnt": 4,
+      "organCode": "user",
       "users": {
         "userId": "threeTeamLeader",
         "userName": "3팀장"
       },
       "depts": {
-        "deptCode": "d1005",
+        "deptId": "d1005",
         "deptName": "개발3팀",
-        "deptLocation": "d1005, d1002, d1000"
-      },
-      "organDeptLocation": "d1005, d1002, d1000"
+        "upDepts": "d1002, d1000, root",
+        "upDeptsCnt": 3,
+        "belongDeptId": "d1002"
+      }
     },
     {
-      "organId": 13,
-      "organDeptName": "개발3팀",
+      "organId": 14,
+      "organBelongDeptId": "d1005",
+      "organDeptIdUserNo": "threeTeamBasicDeveloper",
+      "organDeptNameUserName": "3팀초급개발자",
+      "organUpDepts": "d1005, d1002, d1000, root",
+      "organUpDeptsCnt": 4,
+      "organCode": "user",
       "users": {
         "userId": "threeTeamBasicDeveloper",
         "userName": "3팀초급개발자"
       },
       "depts": {
-        "deptCode": "d1005",
+        "deptId": "d1005",
         "deptName": "개발3팀",
-        "deptLocation": "d1005, d1002, d1000"
-      },
-      "organDeptLocation": "d1005, d1002, d1000"
+        "upDepts": "d1002, d1000, root",
+        "upDeptsCnt": 3,
+        "belongDeptId": "d1002"
+      }
     },
     {
-      "organId": 14,
-      "organDeptName": "운영본부",
+      "organId": 15,
+      "organBelongDeptId": "d1000",
+      "organDeptIdUserNo": "d1006",
+      "organDeptNameUserName": "운영본부",
+      "organUpDepts": "d1000, root",
+      "organUpDeptsCnt": 2,
+      "organCode": "dept",
       "depts": {
-        "deptCode": "d1006",
+        "deptId": "d1006",
         "deptName": "운영본부",
-        "deptLocation": "d1006, d1002, d1000"
+        "upDepts": "d1000, root",
+        "upDeptsCnt": 2,
+        "belongDeptId": "d1000"
+      }
+    },
+    {
+      "organId": 16,
+      "organBelongDeptId": "d1006",
+      "organDeptIdUserNo": "smBon",
+      "organDeptNameUserName": "운영본부장",
+      "organUpDepts": "d1006, d1000, root",
+      "organUpDeptsCnt": 3,
+      "organCode": "user",
+      "users": {
+        "userId": "smBon",
+        "userName": "운영본부장"
       },
-      "organDeptLocation": "d1006, d1002, d1000"
+      "depts": {
+        "deptId": "d1006",
+        "deptName": "운영본부",
+        "upDepts": "d1000, root",
+        "upDeptsCnt": 2,
+        "belongDeptId": "d1000"
+      }
     }
   ]
 }

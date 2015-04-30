@@ -1,6 +1,5 @@
 package io.nonamed.domain.department;
 
-import com.google.gson.annotations.Expose;
 import io.nonamed.domain.organization.Organ;
 
 import javax.persistence.*;
@@ -10,34 +9,31 @@ import java.util.ArrayList;
 @Entity
 @Table(name="DEPT")
 public class Dept {
-    @Expose
     @Id
-    @Column(name="DEPT_CODE")
-    private String deptCode;
+    @Column(name="DEPT_ID")
+    private String deptId;
 
-    @Expose
     @Column(name="DEPT_NAME")
     private String deptName;
 
-    @Expose
-    @Column(name="DEPT_LOCATION")
-    private String deptLocation;
+    @Column(name="UP_DEPTS")
+    private String upDepts;
 
-    @Expose
-    @Column(name="UP_DEPT_LOCATION")
-    private String upDeptLocation;
+    @Column(name="UP_DEPTS_CNT")
+    private int upDeptsCnt;
 
-    @Expose(serialize = false, deserialize = false)
+    @Column(name="BELONG_DEPT_ID")
+    private String belongDeptId;
+
     @OneToMany(mappedBy="depts", cascade=CascadeType.ALL)
     List<Organ> organList = new ArrayList<>();
-    private int upDeptCnt;
 
-    public String getDeptCode() {
-        return deptCode;
+    public String getDeptId() {
+        return deptId;
     }
 
-    public void setDeptCode(String deptCode) {
-        this.deptCode = deptCode;
+    public void setDeptId(String deptId) {
+        this.deptId = deptId;
     }
 
     public String getDeptName() {
@@ -48,20 +44,28 @@ public class Dept {
         this.deptName = deptName;
     }
 
-    public String getDeptLocation() {
-        return deptLocation;
+    public String getUpDepts() {
+        return upDepts;
     }
 
-    public void setDeptLocation(String deptLocation) {
-        this.deptLocation = deptLocation;
+    public void setUpDepts(String upDepts) {
+        this.upDepts = upDepts;
     }
 
-    public String getUpDeptLocation() {
-        return upDeptLocation;
+    public int getUpDeptsCnt() {
+        return upDeptsCnt;
     }
 
-    public void setUpDeptLocation(String upDeptLocation) {
-        this.upDeptLocation = upDeptLocation;
+    public void setUpDeptsCnt(int upDeptsCnt) {
+        this.upDeptsCnt = upDeptsCnt;
+    }
+
+    public String getBelongDeptId() {
+        return belongDeptId;
+    }
+
+    public void setBelongDeptId(String belongDeptId) {
+        this.belongDeptId = belongDeptId;
     }
 
     public List<Organ> getOrganList() {
@@ -70,13 +74,5 @@ public class Dept {
 
     public void setOrganList(List<Organ> organList) {
         this.organList = organList;
-    }
-
-    public void setUpDeptCnt(int upDeptCnt) {
-        this.upDeptCnt = upDeptCnt;
-    }
-
-    public int getUpDeptCnt() {
-        return upDeptCnt;
     }
 }

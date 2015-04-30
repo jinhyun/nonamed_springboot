@@ -13,6 +13,10 @@ public class User {
     @Column(name="USER_ID")
     private String userId;
 
+    @Column(name="USER_NO")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private String userNo;
+
     @Column(name="USER_NAME")
     private String userName;
 
@@ -25,6 +29,14 @@ public class User {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getUserNo() {
+        return userNo;
+    }
+
+    public void setUserNo(String userNo) {
+        this.userNo = userNo;
     }
 
     public String getUserName() {

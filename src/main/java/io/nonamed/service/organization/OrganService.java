@@ -31,20 +31,21 @@ public class OrganService {
         deleteUserAndDeptAndOrgan();
         // Tree
         System.out.println(">>> Start Insert Init Data <<<");
-        insertDeptAndOrgan("d1000", "Nonamed Company", "d1000", "root", 1);
-            insertUserAndOrgan("ceo", "노미정", "d1000");
-            insertDeptAndOrgan("d1001", "경영지원", "d1001, d1000, root", "d1000, root", 2);
-            insertDeptAndOrgan("d1002", "개발본부", "d1002, d1000, root", "d1000, root", 2);
+        insertDeptAndOrgan("d1000", "Nonamed Company", "root", "root");
+            insertUserAndOrgan("no1", "CEO", "d1000");
+            insertDeptAndOrgan("d1001", "경영지원", "d1000, root", "d1000");
+                insertUserAndOrgan("busBon", "경영지원본부장", "d1001");
+            insertDeptAndOrgan("d1002", "개발본부", "d1000, root", "d1000");
                 insertUserAndOrgan("devBon", "개발본부장", "d1002");
-                insertDeptAndOrgan("d1003", "개발1팀", "d1003, d1002, d1000, root", "d1002, d1000, root", 3);
+                insertDeptAndOrgan("d1003", "개발1팀", "d1002, d1000, root", "d1002");
                     insertUserAndOrgan("oneTeamLeader", "1팀장", "d1003");
                     insertUserAndOrgan("oneTeamAdvanceDeveloper", "1팀고급개발자", "d1003");
-                insertDeptAndOrgan("d1004", "개발2팀", "d1004, d1002, d1000, root", "d1002, d1000, root", 3);
+                insertDeptAndOrgan("d1004", "개발2팀", "d1002, d1000, root", "d1002");
                     insertUserAndOrgan("twoTeamLeader", "2팀장", "d1004");
-                insertDeptAndOrgan("d1005", "개발3팀", "d1005, d1002, d1000, root", "d1002, d1000, root", 3);
+                insertDeptAndOrgan("d1005", "개발3팀", "d1002, d1000, root", "d1002");
                     insertUserAndOrgan("threeTeamLeader", "3팀장", "d1005");
                     insertUserAndOrgan("threeTeamBasicDeveloper", "3팀초급개발자", "d1005");
-            insertDeptAndOrgan("d1006", "운영본부", "d1006, d1000, root", "d1000, root", 2);
+            insertDeptAndOrgan("d1006", "운영본부", "d1000, root", "d1000");
                 insertUserAndOrgan("smBon", "운영본부장", "d1006");
         System.out.println(">>> End Insert Init Data <<<");
     }
@@ -55,7 +56,7 @@ public class OrganService {
         organRepository.deleteAll();
     }
 
-    public void insertUserAndOrgan(String userId, String userName, String deptCode) {
+    public void insertUserAndOrgan(String userId, String userName, String deptId) {
         // Insert into User
         User user = new User();
         user.setUserId(userId);
@@ -63,14 +64,17 @@ public class OrganService {
         userRepository.save(user);
 
         // Insert into Organ from UserDept
-        Dept dbDept = deptRepository.findOne(deptCode);
+        User dbUser = userRepository.findOne(userId);
+        Dept dbDept = deptRepository.findOne(deptId);
 
         Organ organ = new Organ();
-        organ.setOrganDeptName(dbDept.getDeptName());
-//        organ.setOrganDeptLocation(dbDept.getDeptLocation());
-        organ.setOrganDeptLocation(""); //check
-        organ.setOrganUpDeptCnt(dbDept.getUpDeptCnt()+1);
-        organ.setOrganUpDeptLocation(dbDept.getDeptCode() + ", " + dbDept.getUpDeptLocation()); //check
+        organ.setOrganDeptIdUserNo(dbUser.getUserId());
+        organ.setOrganDeptNameUserName(dbUser.getUserName());
+
+        organ.setOrganBelongDeptId(deptId);
+        organ.setOrganCode("user");
+        organ.setOrganUpDepts(deptId + ", " + dbDept.getUpDepts());
+        organ.setOrganUpDeptsCnt(dbDept.getUpDeptsCnt()+1);
 
         organ.setUsers(user);   // select user
         organ.setDepts(dbDept); // select dbDept
@@ -78,26 +82,29 @@ public class OrganService {
     }
 
     public void insertDeptAndOrgan(
-            String deptCode, String deptName, String deptLocation, String upDeptLocation, int upDeptCnt) {
+            String deptId, String deptName, String upDepts, String belongDeptId) {
         // Insert into Dept
         Dept dept = new Dept();
-        dept.setDeptCode(deptCode);
+        dept.setDeptId(deptId);
         dept.setDeptName(deptName);
-        dept.setDeptLocation(deptLocation);
-        dept.setUpDeptLocation(upDeptLocation);
-        dept.setUpDeptCnt(upDeptCnt);
+        dept.setUpDepts(upDepts);
+        dept.setUpDeptsCnt(upDepts.split(",").length);
+        dept.setBelongDeptId(belongDeptId);
+
         deptRepository.save(dept);
 
         // Insert into Organ from Dept
-        Dept dbDept = deptRepository.findOne(deptCode);
+        Dept dbDept = deptRepository.findOne(deptId);
 
         Organ organ = new Organ();
-        organ.setOrganDeptName(deptName);
-//        organ.setOrganDeptLocation(deptLocation);
-        organ.setOrganDeptLocation("");     //check
-        organ.setOrganUpDeptLocation(upDeptLocation);
-        organ.setOrganUpDeptCnt(upDeptCnt);
+        organ.setOrganBelongDeptId(dbDept.getBelongDeptId());
         organ.setDepts(dbDept);
+        organ.setOrganCode("dept");
+        organ.setOrganDeptIdUserNo(dbDept.getDeptId());
+        organ.setOrganDeptNameUserName(dbDept.getDeptName());
+        organ.setOrganUpDepts(dbDept.getUpDepts());
+        organ.setOrganUpDeptsCnt(dbDept.getUpDeptsCnt());
+
         organRepository.save(organ);
     }
 }

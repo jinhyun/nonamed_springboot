@@ -22,8 +22,8 @@
     <![endif]-->
 </head>
 <body style="background-color: #ffffff" onload="fnInit();">
-    <%--<textarea id="organJson" name="organJson"
-              style="display: block">${organJson}</textarea>--%>
+    <textarea id="organJson" name="organJson" style="display: none">${organJson}</textarea>
+
     <div class="center-block" style="width: 400px;">
         <div class="navbar-default sidebar" role="navigation">
             <div id="organTree" name="organTree" class="sidebar-nav navbar-collapse"
@@ -131,8 +131,7 @@
         };
 
         function fnInit() {
-//            var organJsonValue = document.getElementById("organJson").value;
-            var organJson = $.parseJSON(initData());
+            var organJson = $.parseJSON(document.getElementById("organJson").value);
             var beforeOrganUpDeptsCnt = 1;
 
             $.each(organJson, function (key, value) {
