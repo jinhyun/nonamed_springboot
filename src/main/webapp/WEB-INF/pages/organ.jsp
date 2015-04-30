@@ -8,9 +8,6 @@
     <!-- MetisMenu CSS -->
     <link href="/resources/bootstrap/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
 
-    <!-- Timeline CSS -->
-    <link href="/resources/bootstrap/dist/css/timeline.css" rel="stylesheet">
-
     <!-- Custom CSS -->
     <link href="/resources/bootstrap/dist/css/sb-admin-2.css" rel="stylesheet">
 
@@ -29,41 +26,9 @@
               style="display: block">${organJson}</textarea>--%>
     <div class="center-block" style="width: 400px;">
         <div class="navbar-default sidebar" role="navigation">
-            <div id="organTree" name="organTree"
-                 class="sidebar-nav navbar-collapse"
+            <div id="organTree" name="organTree" class="sidebar-nav navbar-collapse"
                  style="width:400px; background-color: #F8F8F8">
-
                 <ul class="nav" id="ul_root"></ul>
-
-                <%--<ul class="nav" id="side-menu">
-                    <li>
-                        <a href="#"><i class="fa fa-sitemap fa-fw"></i>Nonamed Company<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="#"><i class="fa fa-user fa-fw"></i>CEO</a>
-                            </li>
-                            <li id="li_d1002">
-                                <a href="#"><i class="fa fa-group fa-fw"></i>개발본부<span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    <li>
-                                        <a href="#"><i class="fa fa-user fa-fw"></i>개발본부장</a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-group fa-fw"></i>개발1팀<span class="fa arrow"></span></a>
-                                        <ul class="nav nav-fourth-level">
-                                            <li>
-                                                <a href="#"><i class="fa fa-user fa-fw"></i>1팀장</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-group fa-fw"></i>운영본부<span class="fa arrow"></span></a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>--%>
             </div>
         </div>
     </div>
@@ -75,9 +40,6 @@
 
     <!-- Metis Menu Plugin JavaScript -->
     <script src="/resources/bootstrap/bower_components/metisMenu/dist/metisMenu.min.js"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="/resources/bootstrap/dist/js/sb-admin-2.js"></script>
 
     <script type="application/javascript">
         function fnInit() {
@@ -109,8 +71,6 @@
                         li.className="active";
 
                         $("#ul_"+organBelongDeptId).append(li.outerHTML);
-//                        $("#ul_root").append(li.outerHTML);
-//                        debugger;
 
                     } else if (beforeOrganUpDeptsCnt != organUpDeptsCnt){
                         // upLevel or downLevel
@@ -168,7 +128,6 @@
                         }
 
                         $("#ul_"+organBelongDeptId).append(li.outerHTML);
-//                        debugger;
 
                     } else {
                         console.log("Exception");
