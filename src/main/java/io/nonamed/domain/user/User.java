@@ -1,5 +1,6 @@
 package io.nonamed.domain.user;
 
+import com.google.gson.annotations.Expose;
 import io.nonamed.domain.organization.Organ;
 
 import javax.persistence.*;
@@ -11,17 +12,23 @@ import java.util.List;
 public class User {
     @Id
     @Column(name="USER_ID")
+    @Expose
     private String userId;
 
     @Column(name="USER_NO")
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Expose
     private String userNo;
 
     @Column(name="USER_NAME")
+    @Expose
     private String userName;
 
-    @OneToMany(mappedBy="users", cascade=CascadeType.ALL)
+    @OneToMany(mappedBy="users", fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     List<Organ> organList = new ArrayList<>();
+
+    @Expose
+    private String userPassword;
 
     public String getUserId() {
         return userId;

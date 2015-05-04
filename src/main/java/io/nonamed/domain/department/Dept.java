@@ -25,7 +25,7 @@ public class Dept {
     @Column(name="BELONG_DEPT_ID")
     private String belongDeptId;
 
-    @OneToMany(mappedBy="depts", cascade=CascadeType.ALL)
+    @OneToMany(mappedBy="depts", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
     List<Organ> organList = new ArrayList<>();
 
     public String getDeptId() {

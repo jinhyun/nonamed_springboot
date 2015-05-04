@@ -5,5 +5,13 @@
 </head>
 <body>
     Welcome to ${message}
+    <ul>세션정보
+        <li>
+            <input type="text" value="${userSession.userId}">
+        </li>
+        <li>
+            <input type="text" value="${userSession.userName}">
+        </li>
+    </ul>
 </body>
 </html>
