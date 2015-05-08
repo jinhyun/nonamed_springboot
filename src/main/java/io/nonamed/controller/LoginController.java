@@ -25,7 +25,7 @@ public class LoginController {
     @Autowired
     OrganService organService;
 
-    @RequestMapping(value="/login")
+    @RequestMapping(value="/")
     public ModelAndView login(){
         organService.insertOrgan_initData();
         return new ModelAndView("login").addObject("message", "Nonamed World");

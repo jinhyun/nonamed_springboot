@@ -19,6 +19,16 @@
     <div id="wrapper">
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div id="header-layout" class="navbar-header"></div>
+            <ul class="nav navbar-top-links navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="padding-left: 0; padding-right: 0">
+                        <i class="fa fa-power-off fa-fw"></i>
+                    </a>
+                </li>
+                <li>
+                    ${userSession.userName}
+                </li>
+            </ul>
             <div id="sidebar-layout" class="navbar-default sidebar" role="navigation"></div>
         </nav>
         <div id="page-wrapper">
