@@ -2,7 +2,6 @@ package io.nonamed.controller;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import io.nonamed.domain.user.User;
 import io.nonamed.service.organization.OrganService;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
 
 @Controller
 @SessionAttributes("userSession")
